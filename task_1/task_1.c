@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Define an appropriate struct
+// describe each variable
+// class named FITNESS_DATA
 typedef struct {
 	char date[11];
 	char time[6];
