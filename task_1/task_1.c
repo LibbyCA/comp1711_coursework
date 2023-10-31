@@ -48,6 +48,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
 // Complete the main function
 int main()
 {
+
     char filename[] = "FitnessData_2023.csv";
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -56,17 +57,26 @@ int main()
         return 1;
     }
 
-    
-
+    int i = 0;
+    FITNESS_DATA records[3];
     int buffer_size = 100;
     char line_buffer[buffer_size];
     while (fgets(line_buffer, buffer_size, file) != NULL)
     {
-        printf("%s", line_buffer);
+
+        char csteps[8];
+        if (i < 3)
+        {
+            tokeniseRecord(line_buffer, ",", records[i].date, records[i].time, csteps);
+            records[i].steps = atoi(csteps);
+        }
+        i++;
     }
 
-    fclose(file);
+    printf("Number of records in file: %d\n", i);
+    for (int j = 0; j < 3; j++)
+        printf("%s/%s/%d\n", records[j].date, records[j].time, records[j].steps);
 
-    
+    fclose(file);
     return 0;
 }
