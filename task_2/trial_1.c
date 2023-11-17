@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+// find smallest value in array 
+// https://www.tutorialspoint.com/learn_c_by_examples/smallest_array_element_in_c.htm
+
 int main() {
    int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
    int loop, smallest;
