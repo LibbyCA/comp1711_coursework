@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define buffer_size 100
 // describe each variable
 // class named FITNESS_DATA
 typedef struct
 {
     char date[11];
-    char time[6];
+    char time[5];
     int steps;
 } FITNESS_DATA;
 

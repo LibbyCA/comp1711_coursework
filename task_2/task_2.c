@@ -3,36 +3,11 @@
 // Complete the main function
 int main()
 {
-
-    char filename[] = "FitnessData_2023.csv";
-    FILE *file = fopen(filename, "r");
-    if (file == NULL)
-    {
-        perror("");
-        return 1;
-    }
-
-    int i = 0;
-    FITNESS_DATA records[3];
-    int buffer_size = 100;
+    FITNESS_DATA daily_readings[100];
     char line_buffer[buffer_size];
-    while (fgets(line_buffer, buffer_size, file) != NULL)
-    {
-
-        char xsteps[8];
-        if (i < 3)
-        {
-            tokeniseRecord(line_buffer, ",", records[i].date, records[i].time, xsteps);
-            records[i].steps = atoi(xsteps);
-        }
-        i++;
-    }
-
-    printf("Number of records in file: %d\n", i);
-    for (int j = 0; j < 3; j++)
-        printf("%s/%s/%d\n", records[j].date, records[j].time, records[j].steps);
-
+    char filename[buffer_size];
     char choice;
+    int counter;
 
     while (1)
     {
@@ -56,12 +31,31 @@ int main()
             printf("Please enter the name of the data file: ");
             fgets(line_buffer, buffer_size, stdin);
             sscanf(line_buffer, " %s ", filename);
+            FILE *input = fopen(filename, "r");
+            if (!input)
+            {
+                printf("Error: File could not be opened\n");
+                return 1;
+            }
             // error if file cannot be opened successfully
-            return 0;
+            fclose(stdin);
             break;
 
         case 'B':
         case 'b':
+            counter = 0;
+
+            while (fgets(line_buffer, buffer_size, input))
+            {
+                tokeniseRecord(line_buffer, ",", daily_readings[counter].date, daily_readings[counter].time);
+                counter++;
+            }
+            for (int i = 0; i < counter; i++)
+            {
+                printf("%s - time %s", daily_readings[i].date, daily_readings[i].time);
+            }
+            printf("Number of records in file: %d\n", counter);
+            fclose(input);
             break;
 
         case 'C':
@@ -94,7 +88,4 @@ int main()
             break;
         }
     }
-
-    fclose(file);
-    return 0;
 }
