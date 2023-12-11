@@ -9,6 +9,10 @@ int main()
     char filename[buffer_size];
     char choice;
     int counter;
+    int mean;
+    int x;
+    int lowest;
+    int highest;
 
 
     while (1)
@@ -59,23 +63,63 @@ int main()
             i = 0;
             while (fgets(line_buffer, buffer_size, input))
             {
-                char xsteps [100];
+                char xsteps [15];
                 tokeniseRecord(line_buffer, ",", daily_readings[i].date, daily_readings[i].time, xsteps);
                 daily_readings[i].steps = atoi(xsteps);
-                 i++;
+                i++;
             }
-            printf("Total number of records in the files: %d\n", i);
+            lowest = daily_readings[0].steps;
+            for (int j = 0; j < i; j ++)
+            {
+                if (daily_readings[j].steps < lowest) {
+                    lowest = daily_readings[j].steps;
+                    x = j;
+                }
+
+            }
+            printf("Fewest steps: %s %s\n", daily_readings[x].date, daily_readings[x].time);
             fclose(input);
             break;
 
         case 'D':
         case 'd':
-            return 0;
+            i = 0;
+            while (fgets(line_buffer, buffer_size, input))
+            {
+                char xsteps [15];
+                tokeniseRecord(line_buffer, ",", daily_readings[i].date, daily_readings[i].time, xsteps);
+                daily_readings[i].steps = atoi(xsteps);
+                i++;
+            }
+            highest = daily_readings[0].steps;
+            for (int j = 0; j < i; j ++)
+            {
+                if (daily_readings[j].steps > highest) {
+                    highest = daily_readings[j].steps;
+                    x = j;
+                }
+
+            }
+            printf("Highest steps: %s %s\n", daily_readings[x].date, daily_readings[x].time);
+            fclose(input);
             break;
 
         case 'E':
         case 'e':
-            return 0;
+            i = 0;
+            mean = 0;
+            while (fgets(line_buffer, buffer_size, input))
+            {
+                printf("1");
+                char xsteps [59];
+                tokeniseRecord(line_buffer, ",", daily_readings[i].date, daily_readings[i].time, xsteps);
+                daily_readings[i].steps = atoi(xsteps);
+                mean += daily_readings[i].steps;
+                i++;
+            }
+            mean /= counter;
+            printf("Mean step count: %d\n", mean);
+            fclose(input);
             break;
 
         case 'F':
