@@ -4,10 +4,12 @@
 int main()
 {
     FITNESS_DATA daily_readings[100];
+    int buffer_size = 100;
     char line_buffer[buffer_size];
     char filename[buffer_size];
     char choice;
     int counter;
+
 
     while (1)
     {
@@ -20,9 +22,9 @@ int main()
         printf("Q: Quit\n");
 
         choice = getchar();
+        int i;
 
-        while (getchar() != '\n')
-            ;
+        while (getchar() != '\n');
 
         switch (choice)
         {
@@ -38,29 +40,32 @@ int main()
                 return 1;
             }
             // error if file cannot be opened successfully
-            fclose(stdin);
             break;
 
         case 'B':
         case 'b':
-            counter = 0;
-
+            i = 0;
             while (fgets(line_buffer, buffer_size, input))
             {
-                tokeniseRecord(line_buffer, ",", daily_readings[counter].date, daily_readings[counter].time);
-                counter++;
+                i++;
             }
-            for (int i = 0; i < counter; i++)
-            {
-                printf("%s - time %s", daily_readings[i].date, daily_readings[i].time);
-            }
-            printf("Number of records in file: %d\n", counter);
+
+            printf("Total number of records in the files: %d\n", i);
             fclose(input);
             break;
 
         case 'C':
         case 'c':
-            return 0;
+            i = 0;
+            while (fgets(line_buffer, buffer_size, input))
+            {
+                char xsteps [100];
+                tokeniseRecord(line_buffer, ",", daily_readings[i].date, daily_readings[i].time, xsteps);
+                daily_readings[i].steps = atoi(xsteps);
+                 i++;
+            }
+            printf("Total number of records in the files: %d\n", i);
+            fclose(input);
             break;
 
         case 'D':

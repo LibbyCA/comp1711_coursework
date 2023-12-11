@@ -57,11 +57,16 @@ int main()
             fgets(line_buffer, buffer_size, stdin);
             sscanf(line_buffer, " %s ", filename);
             // error if file cannot be opened successfully
-            return 0;
+            fclose(stdin)
             break;
 
         case 'B':
         case 'b':
+            int counter = 0;
+            while (fgets(line_buffer, buffer_size, filename) != NULL){
+                counter ++
+            }
+            printf("Number of records in file: %d\n", counter);
             break;
 
         case 'C':

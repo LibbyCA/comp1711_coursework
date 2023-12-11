@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define buffer_size 100
+
 // describe each variable
 // class named FITNESS_DATA
 typedef struct
