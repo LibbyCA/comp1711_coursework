@@ -163,8 +163,8 @@ int main()
             }
             if (maxInterval > 0)
             {
-                printf("Longest period start: %s %s\n", daily_readings[maxStart].date, daily_readings[maxStart].time);
-                printf("Longest period end: %s %s\n", daily_readings[maxStart + maxInterval -1].date, daily_readings[maxStart + maxInterval - 1].time);
+                printf("%s %s\n", daily_readings[maxStart].date, daily_readings[maxStart].time);
+                printf("%s %s\n", daily_readings[maxStart + maxInterval -1].date, daily_readings[maxStart + maxInterval - 1].time);
             }
             break;
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 
 // describe each variable
@@ -8,7 +9,7 @@
 typedef struct
 {
     char date[11];
-    char time[5];
+    char time[6];
     int steps;
 } FITNESS_DATA;
 
